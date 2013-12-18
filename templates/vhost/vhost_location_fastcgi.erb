@@ -1,6 +1,8 @@
   location <%= @location %> {
 <% if @location_cfg_prepend -%><% @location_cfg_prepend.sort_by {|k,v| k}.each do |key,value| -%>
-    <%= key %>         <%= value %>;
+<% Array(value).each do |sub| -%>
+    <%= key %> <%= sub %>;
+<% end %>
 <% end -%><% end -%>
 <% if defined? @www_root -%>
     root  <%= @www_root %>;
@@ -17,7 +19,9 @@
     fastcgi_param SCRIPT_FILENAME <%= @fastcgi_script %>;
 <% end -%>
 <% if @location_cfg_append -%><% @location_cfg_append.sort_by {|k,v| k}.each do |key,value| -%>
-    <%= key %> <%= value %>;
+<% Array(value).each do |sub| -%>
+    <%= key %> <%= sub %>;
+<% end %>
 <% end -%><% end -%>
   }
 
